@@ -725,10 +725,25 @@ select {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  gap: 0.75rem;
 }
 
 .filterBar h2 {
   margin: 0;
+}
+
+.taskHeaderMeta {
+  flex-wrap: nowrap;
+}
+
+.taskHeaderMeta h2,
+.taskCount {
+  white-space: nowrap;
+}
+
+.filterBar select {
+  width: 240px;
+  min-width: 200px;
 }
 
 .taskCount {
@@ -836,6 +851,11 @@ select {
     flex-direction: column;
     gap: 0.75rem;
     align-items: flex-start;
+  }
+
+  .filterBar select {
+    width: 100%;
+    min-width: 0;
   }
 }
 

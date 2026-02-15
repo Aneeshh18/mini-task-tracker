@@ -445,7 +445,7 @@ export default function DashboardPage() {
 
       <section className="card">
         <div className="filterBar">
-          <div className="row">
+          <div className="row taskHeaderMeta">
             <h2>Your tasks</h2>
             <span className="taskCount">{filteredTasks.length}</span>
           </div>
