@@ -1,8 +1,31 @@
 # Mini Task Tracker
 
 Full-stack task tracker with:
+
 - Backend: Node.js + TypeScript + Express + Mongoose + Redis + Jest
 - Frontend: Next.js (App Router)
+
+## Features
+
+### Authentication
+
+- Signup and login with JWT-based auth
+- Password hashing with bcrypt
+
+### Task Management
+
+- Create, list, edit, delete tasks
+- Toggle task status (`pending` / `completed`)
+- Status-based filtering (`all`, `pending`, `completed`)
+
+### Caching
+
+- Per-user Redis cache for `GET /api/tasks`
+- Cache invalidation on create/update/delete
+
+### PS: Dashboard Enhancements -
+
+- wow moments for you while you explore task-tacker
 
 ## Project Structure
 
@@ -12,45 +35,58 @@ Full-stack task tracker with:
 ## Backend Setup
 
 ### Start MongoDB + Redis with Docker
+
 From repo root:
+
 ```bash
 docker compose up -d
 ```
 
 This starts:
+
 - MongoDB on `127.0.0.1:27017`
 - Redis on `127.0.0.1:6379`
 
 To stop:
+
 ```bash
 docker compose down
 ```
 
 To stop and remove volumes (fresh DB/cache):
+
 ```bash
 docker compose down -v
 ```
 
 1. Install dependencies:
+
 ```bash
 cd backend
 npm install
 ```
+
 2. Create env file:
+
 ```bash
 cp .env.example .env
 ```
+
 3. Run dev server:
+
 ```bash
 npm run dev
 ```
+
 4. Build and run production server:
+
 ```bash
 npm run build
 npm start
 ```
 
 ### Backend Scripts
+
 - `npm run dev` - start backend in watch mode
 - `npm run build` - compile TypeScript to `dist`
 - `npm start` - run compiled server
@@ -60,30 +96,38 @@ npm start
 ### Backend API
 
 Auth:
+
 - `POST /api/auth/signup`
 - `POST /api/auth/login`
 
 Tasks (JWT required):
+
 - `GET /api/tasks`
 - `POST /api/tasks`
 - `PUT /api/tasks/:id`
 - `DELETE /api/tasks/:id`
 
 Health:
+
 - `GET /health`
 
 ## Frontend Setup
 
 1. Install dependencies:
+
 ```bash
 cd frontend
 npm install
 ```
+
 2. Create env file:
+
 ```bash
 cp .env.example .env.local
 ```
+
 3. Run dev server:
+
 ```bash
 npm run dev
 ```
@@ -93,6 +137,7 @@ Open `http://localhost:3000`.
 ## Environment Variables
 
 ### backend/.env
+
 - `PORT` - backend port (default `5000`)
 - `MONGO_URI` - MongoDB connection string
 - `REDIS_URL` - Redis connection string
@@ -101,7 +146,35 @@ Open `http://localhost:3000`.
 - `CACHE_TTL_SECONDS` - task cache TTL per user
 
 ### frontend/.env.local
+
 - `NEXT_PUBLIC_API_URL` - backend base URL, e.g. `http://localhost:5000`
+
+## Testing & Coverage
+
+- Test command:
+
+```bash
+cd backend
+npm test
+```
+
+- Coverage command:
+
+```bash
+cd backend
+npm run test:coverage
+```
+
+- Latest local coverage run: ~`92.78%` statements
+- Test stack:
+  - `Jest`
+  - `supertest`
+  - `mongodb-memory-server`
+  - `redis-mock`
+
+## UI Behavior Note
+
+- When filtered by status, toggling a task can make it disappear from the current list immediately (expected behavior, since it no longer matches the active filter).
 
 ## Notes
 
